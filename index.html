@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth scroll-pt-24">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>おばんざい居酒屋 ふくろう ｜ 小岩・南小岩のおばんざい居酒屋</title>
+  <meta name="description" content="小岩駅徒歩7分。京のおばんざいを日替わり十品から選べる、野菜と魚にやさしい居酒屋「ふくろう」。ひとりでも、ふらりと。">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="おばんざい居酒屋 ふくろう ｜ 小岩">
+  <meta property="og:description" content="京のおばんざいを、日替わり十品から。野菜と魚にやさしい、小岩の居酒屋。">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Shippori+Mincho+B1:wght@400;500;600;700&family=Noto+Serif+JP:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sumi:    '#241E18',  // 墨黒（やや茶）
+            kinari:  '#F4EEE2',  // 生成り（和紙）
+            paper:   '#FBF7EF',  // 薄い和紙
+            gold:    '#A87B4B',  // 燻し金
+            goldlt:  '#C9A063',  // 明るい燻し金
+            beni:    '#8B3A36',  // 弁柄朱
+            ink:     '#2C2620',  // 焦茶
+            sub:     '#6B5A4E',  // 枯草
+            line:    '#DED3C0',  // 罫線
+          },
+          fontFamily: {
+            mincho:  ['"Shippori Mincho B1"', '"Noto Serif JP"', 'serif'],
+            serif:   ['"Noto Serif JP"', 'serif'],
+            cormo:   ['"Cormorant Garamond"', 'serif'],
+          },
+          letterSpacing: {
+            wider2: '.22em',
+            jumbo:  '.4em',
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    html, body { background: #F4EEE2; color: #241E18; }
+    body { font-family: '"Shippori Mincho B1"', '"Noto Serif JP"', serif; }
+
+    /* 和紙テクスチャ（うっすら） */
+    .washi { position: relative; }
+    .washi::after {
+      content: '';
+      position: absolute; inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+
+    /* ヘアライン装飾 */
+    .hairline { background: linear-gradient(90deg, transparent, #A87B4B 20%, #A87B4B 80%, transparent); height: 1px; }
+
+    /* セクションラベル（Latin） */
+    .eyebrow { font-family: 'Cormorant Garamond', serif; font-style: italic; letter-spacing: .35em; }
+
+    /* スクロールリビール */
+    .reveal { opacity: 0; transform: translateY(22px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-scale { opacity: 0; transform: scale(.96); transition: all 1s cubic-bezier(.16,1,.3,1); }
+    .reveal-scale.visible { opacity: 1; transform: scale(1); }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal-scale { opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
+
+    /* ヒーロー暗幕 */
+    .hero-overlay {
+      background:
+        linear-gradient(90deg, rgba(28,22,18,0.86) 0%, rgba(28,22,18,0.62) 42%, rgba(28,22,18,0.30) 78%, rgba(28,22,18,0.20) 100%),
+        linear-gradient(180deg, rgba(28,22,18,0.30) 0%, transparent 30%, rgba(28,22,18,0.55) 100%);
+    }
+
+    /* ナビ下線 */
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: ''; position: absolute; left: 0; bottom: -6px;
+      width: 0; height: 1px; background: #A87B4B; transition: width .4s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    /* メニュー画像ホバー */
+    .zoom { transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1); }
+    .zoom:hover { transform: scale(1.05); }
+
+    /* 写真トーン統一（墨×金・和の落ち着き） */
+    section img { filter: saturate(.93) contrast(1.03) sepia(.05); }
+
+    /* 漢字 watermark */
+    .kanji-bg {
+      font-family: 'Shippori Mincho B1', serif; font-weight: 400; line-height: .85;
+      pointer-events: none; user-select: none; color: #A87B4B; opacity: 0.06;
+    }
+    .kanji-bg-dark { color: #C9A063; opacity: 0.09; }
+
+    /* 麻の葉パターン（淡い） */
+    .pattern-asanoha {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='69' viewBox='0 0 40 69'%3E%3Cg fill='none' stroke='%23A87B4B' stroke-width='0.4' opacity='0.18'%3E%3Cpath d='M20 0v23M0 11.5l20 11.5 20-11.5M0 34.5l20-11.5 20 11.5M20 23v23M0 34.5l20 11.5 20-11.5M0 57.5l20-11.5 20 11.5M20 46v23'/%3E%3C/g%3E%3C/svg%3E");
+      background-size: 40px 69px;
+    }
+
+    @media (min-width: 768px) { .mobile-cta { display: none; } }
+  </style>
+</head>
+<body class="font-mincho text-sumi overflow-x-hidden pb-[72px] md:pb-0">
+
+  <!-- ============== HEADER ============== -->
+  <header class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-kinari/90 border-b border-line/70">
+    <div class="max-w-7xl mx-auto px-5 md:px-10 h-[68px] md:h-20 flex items-center justify-between">
+      <a href="#top" class="flex items-center gap-3">
+        <span class="grid place-items-center w-9 h-9 rounded-full border border-gold/50 text-gold text-sm"><i class="fa-solid fa-feather-pointed"></i></span>
+        <span class="flex flex-col leading-none">
+          <span class="font-mincho text-lg md:text-xl tracking-wider2 text-sumi">おばんざい居酒屋 ふくろう</span>
+          <span class="eyebrow text-[10px] tracking-jumbo text-gold mt-1">owl — Koiwa</span>
+        </span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm tracking-wider2 text-ink">
+        <a href="#concept" class="nav-link">想い</a>
+        <a href="#menu"    class="nav-link">お品書き</a>
+        <a href="#craft"   class="nav-link">こだわり</a>
+        <a href="#gallery" class="nav-link">店内</a>
+        <a href="#access"  class="nav-link">アクセス</a>
+      </nav>
+
+      <a href="tel:07089862960" class="hidden md:inline-flex items-center gap-2 px-5 py-2.5 bg-gold text-kinari text-xs tracking-wider2 hover:bg-sumi transition-colors duration-500">
+        <i class="fa-solid fa-phone text-[10px]"></i>
+        <span>ご予約・お問い合わせ</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ============== HERO ============== -->
+  <section id="top" class="relative h-[92svh] min-h-[600px] w-full overflow-hidden">
+    <img src="images/hero.jpg"
+         alt="ふくろうの温かなカウンター席" class="absolute inset-0 w-full h-full object-cover object-center">
+    <div class="absolute inset-0 hero-overlay"></div>
+
+    <div class="relative h-full max-w-7xl mx-auto px-6 md:px-10 flex flex-col justify-center text-kinari">
+      <p class="eyebrow text-sm md:text-base text-goldlt mb-6 reveal">— Obanzai Izakaya owl, Koiwa —</p>
+      <h1 class="font-mincho text-[2.6rem] leading-[1.25] md:text-6xl md:leading-[1.3] tracking-wider2 mb-7 reveal">
+        小岩の夜に、<br>京のおばんざいを。
+      </h1>
+      <div class="w-12 h-px bg-goldlt mb-7 reveal"></div>
+      <p class="font-serif text-sm md:text-lg leading-loose tracking-wider text-kinari/90 max-w-xl reveal">
+        野菜と魚にこだわった、日替わり十品。<br>
+        えらぶ楽しみを、肩肘張らずに。ひとりでも、ふらりと。
+      </p>
+
+      <div class="flex flex-wrap items-center gap-4 mt-12 reveal">
+        <a href="#menu" class="inline-flex items-center gap-3 px-7 py-3.5 bg-gold text-kinari text-xs tracking-wider2 hover:bg-kinari hover:text-sumi transition-colors duration-500">
+          <span>お品書きを見る</span><i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </a>
+        <a href="#access" class="inline-flex items-center gap-3 px-7 py-3.5 border border-kinari/70 text-kinari text-xs tracking-wider2 hover:bg-kinari hover:text-sumi transition-colors duration-500">
+          <span>アクセス</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 営業時間ミニバー -->
+    <div class="hidden md:flex absolute bottom-0 inset-x-0 bg-sumi/55 backdrop-blur-sm border-t border-kinari/15 text-kinari/85">
+      <div class="max-w-7xl mx-auto w-full px-10 py-4 flex items-center gap-10 text-xs tracking-wider2">
+        <span><i class="fa-solid fa-clock text-goldlt mr-2"></i>16:00 – 23:00（L.O. 22:30）</span>
+        <span><i class="fa-solid fa-calendar-xmark text-goldlt mr-2"></i>火曜定休</span>
+        <span><i class="fa-solid fa-location-dot text-goldlt mr-2"></i>小岩駅南口 徒歩7分</span>
+        <span class="ml-auto eyebrow text-goldlt">since 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== CONCEPT ============== -->
+  <section id="concept" class="washi relative overflow-hidden py-24 md:py-36 px-6 md:px-10 bg-kinari">
+    <span class="kanji-bg absolute -right-8 -bottom-20 text-[44vw] md:text-[26vw] leading-none">福</span>
+    <div class="max-w-5xl mx-auto relative z-10">
+      <div class="text-center mb-14 md:mb-20">
+        <p class="eyebrow text-gold text-sm mb-4">CONCEPT</p>
+        <h2 class="font-mincho text-2xl md:text-4xl leading-relaxed tracking-wider reveal">
+          京の家庭の味を、<br class="md:hidden">ふくろうの止まり木で。
+        </h2>
+        <div class="w-10 h-px bg-gold mx-auto mt-7"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 font-serif text-sub leading-loose text-sm md:text-[15px] tracking-wider reveal">
+        <div class="space-y-6">
+          <p>
+            おばんざいは、京都の家庭で日々作られてきたおかず。
+            気取らないけれど、滋味深い。だしと旬を大切にした、毎日でも食べたくなる味です。
+          </p>
+          <p>
+            小岩では珍しいおばんざいを、その日の気分で選びながら。
+            野菜をたっぷり、魚もしっかり。美容と健康にうれしい、体にやさしい一皿を日替わりでご用意しています。
+          </p>
+        </div>
+        <div class="space-y-6">
+          <p>
+            「ふくろう」は、<span class="text-gold">不苦労</span>、<span class="text-gold">福来郎</span>。
+            苦労知らずで福を呼ぶ、夜の縁起の鳥。
+          </p>
+          <p>
+            一日の終わりに、ふっと羽を休める。
+            ひとりでも、仲間とでも、ふらりと立ち寄れる。
+            そんな小岩の止まり木でありたいと、私たちは願っています。
+          </p>
+          <p class="font-mincho text-gold tracking-wider2 pt-2">— えらぶ楽しみを、おばんざいで。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== MENU ============== -->
+  <section id="menu" class="relative overflow-hidden py-24 md:py-36 px-6 md:px-10 bg-paper washi pattern-asanoha">
+    <div class="max-w-6xl mx-auto relative z-10">
+      <div class="text-center mb-16 md:mb-20">
+        <p class="eyebrow text-gold text-sm mb-4">MENU</p>
+        <h2 class="font-mincho text-3xl md:text-4xl tracking-wider2 mb-5">おすすめのお品書き</h2>
+        <div class="w-10 h-px bg-gold mx-auto mb-6"></div>
+        <p class="font-serif text-sub text-sm tracking-wider">日替わりで約十種のおばんざいから、その日の気分で。</p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-8">
+
+        <!-- 01 -->
+        <article class="reveal-scale group">
+          <div class="overflow-hidden aspect-[4/3] mb-4 shadow-[0_22px_44px_-26px_rgba(36,30,24,.6)]">
+            <img src="images/menu-01.jpg" alt="おばんざい盛り合わせ" class="w-full h-full object-cover zoom">
+          </div>
+          <div class="flex items-baseline justify-between gap-2">
+            <h3 class="font-mincho text-base md:text-lg tracking-wider">おばんざい盛り合わせ</h3>
+            <span class="font-cormo text-gold text-lg whitespace-nowrap">¥1,280</span>
+          </div>
+          <p class="font-serif text-sub text-xs leading-relaxed mt-2">日替わりの小鉢を、彩りよく一膳に。迷ったらまずはこれを。</p>
+        </article>
+
+        <!-- 02 -->
+        <article class="reveal-scale group">
+          <div class="overflow-hidden aspect-[4/3] mb-4 shadow-[0_22px_44px_-26px_rgba(36,30,24,.6)]">
+            <img src="images/menu-02.jpg" alt="本日のおばんざい 小鉢膳" class="w-full h-full object-cover zoom">
+          </div>
+          <div class="flex items-baseline justify-between gap-2">
+            <h3 class="font-mincho text-base md:text-lg tracking-wider">本日のおばんざい膳</h3>
+            <span class="font-cormo text-gold text-lg whitespace-nowrap">¥980</span>
+          </div>
+          <p class="font-serif text-sub text-xs leading-relaxed mt-2">その日のおばんざいを少しずつ。野菜たっぷり、体にやさしく。</p>
+        </article>
+
+        <!-- 03 -->
+        <article class="reveal-scale group">
+          <div class="overflow-hidden aspect-[4/3] mb-4 shadow-[0_22px_44px_-26px_rgba(36,30,24,.6)]">
+            <img src="images/menu-03.jpg" alt="鶏の唐揚げ" class="w-full h-full object-cover zoom">
+          </div>
+          <div class="flex items-baseline justify-between gap-2">
+            <h3 class="font-mincho text-base md:text-lg tracking-wider">鶏の唐揚げ</h3>
+            <span class="font-cormo text-gold text-lg whitespace-nowrap">¥680</span>
+          </div>
+          <p class="font-serif text-sub text-xs leading-relaxed mt-2">外はカリッと、中はジューシー。レモンをきゅっと添えて。</p>
+        </article>
+
+        <!-- 04 -->
+        <article class="reveal-scale group">
+          <div class="overflow-hidden aspect-[4/3] mb-4 shadow-[0_22px_44px_-26px_rgba(36,30,24,.6)]">
+            <img src="images/menu-04.jpg" alt="厚揚げ焼き" class="w-full h-full object-cover zoom">
+          </div>
+          <div class="flex items-baseline justify-between gap-2">
+            <h3 class="font-mincho text-base md:text-lg tracking-wider">厚揚げ焼き</h3>
+            <span class="font-cormo text-gold text-lg whitespace-nowrap">¥520</span>
+          </div>
+          <p class="font-serif text-sub text-xs leading-relaxed mt-2">こんがり焼いた厚揚げに、大根おろしと鰹節をのせて。</p>
+        </article>
+
+        <!-- 05 -->
+        <article class="reveal-scale group">
+          <div class="overflow-hidden aspect-[4/3] mb-4 shadow-[0_22px_44px_-26px_rgba(36,30,24,.6)]">
+            <img src="images/menu-05.jpg" alt="フライドポテト" class="w-full h-full object-cover zoom">
+          </div>
+          <div class="flex items-baseline justify-between gap-2">
+            <h3 class="font-mincho text-base md:text-lg tracking-wider">フライドポテト</h3>
+            <span class="font-cormo text-gold text-lg whitespace-nowrap">¥480</span>
+          </div>
+          <p class="font-serif text-sub text-xs leading-relaxed mt-2">揚げたて、ほくほく。みんなで気軽につまめる一品。</p>
+        </article>
+
+        <!-- 06 -->
+        <article class="reveal-scale group">
+          <div class="overflow-hidden aspect-[4/3] mb-4 shadow-[0_22px_44px_-26px_rgba(36,30,24,.6)]">
+            <img src="images/menu-06.jpg" alt="〆の焼きおにぎり" class="w-full h-full object-cover zoom">
+          </div>
+          <div class="flex items-baseline justify-between gap-2">
+            <h3 class="font-mincho text-base md:text-lg tracking-wider">〆の焼きおにぎり</h3>
+            <span class="font-cormo text-gold text-lg whitespace-nowrap">¥380</span>
+          </div>
+          <p class="font-serif text-sub text-xs leading-relaxed mt-2">香ばしい醤油の焦げ目。一日の終わりに、ほっとひと口。</p>
+        </article>
+
+      </div>
+
+      <p class="text-center mt-14 font-serif text-sub text-xs tracking-wider2">
+        ※ 価格はイメージです。おばんざいは仕入れにより日替わりで、約十種からお選びいただけます。
+      </p>
+    </div>
+  </section>
+
+  <!-- ============== GALLERY (帯) ============== -->
+  <section id="gallery" class="relative bg-sumi text-kinari py-20 md:py-28 overflow-hidden">
+    <span class="kanji-bg kanji-bg-dark absolute -left-6 top-6 text-[34vw] md:text-[20vw] leading-none">灯</span>
+    <div class="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
+      <div class="text-center mb-12 md:mb-16">
+        <p class="eyebrow text-goldlt text-sm mb-4">GALLERY</p>
+        <h2 class="font-mincho text-2xl md:text-4xl tracking-wider2">店内の風景</h2>
+        <div class="w-10 h-px bg-goldlt mx-auto mt-6"></div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        <div class="overflow-hidden aspect-[3/4] reveal"><img src="images/gallery-01.jpg" alt="ふくろうのロゴ" class="w-full h-full object-cover zoom"></div>
+        <div class="overflow-hidden aspect-[3/4] reveal md:mt-8"><img src="images/gallery-02.jpg" alt="名物ドリンク" class="w-full h-full object-cover zoom"></div>
+        <div class="overflow-hidden aspect-[3/4] reveal"><img src="images/gallery-03.jpg" alt="本日のおばんざい" class="w-full h-full object-cover zoom"></div>
+        <div class="overflow-hidden aspect-[3/4] reveal md:mt-8"><img src="images/gallery-04.jpg" alt="鶏の唐揚げ" class="w-full h-full object-cover zoom"></div>
+        <div class="overflow-hidden aspect-[3/4] reveal"><img src="images/gallery-05.jpg" alt="お料理いろいろ" class="w-full h-full object-cover zoom"></div>
+        <div class="overflow-hidden aspect-[3/4] reveal md:mt-8"><img src="images/gallery-06.jpg" alt="お飲みもの" class="w-full h-full object-cover zoom"></div>
+        <div class="overflow-hidden aspect-[3/4] reveal"><img src="images/gallery-07.jpg" alt="揚げたての一品" class="w-full h-full object-cover zoom"></div>
+      </div>
+
+      <p class="text-center mt-12 font-serif text-kinari/60 text-sm tracking-wider2">— カウンター7席・テーブル14席。ひとりでも、貸切でも —</p>
+    </div>
+  </section>
+
+  <!-- ============== CRAFT（こだわり 3カラム） ============== -->
+  <section id="craft" class="washi relative overflow-hidden py-24 md:py-36 px-6 md:px-10 bg-kinari">
+    <div class="max-w-6xl mx-auto relative z-10">
+      <div class="text-center mb-16 md:mb-24">
+        <p class="eyebrow text-gold text-sm mb-4">OUR CRAFT</p>
+        <h2 class="font-mincho text-2xl md:text-4xl tracking-wider2 leading-relaxed">野菜・魚・えらぶ楽しみ。<br class="md:hidden">三つの想いを大切に。</h2>
+        <div class="w-10 h-px bg-gold mx-auto mt-7"></div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-12 md:gap-10 text-center">
+
+        <div class="reveal flex flex-col items-center">
+          <div class="grid place-items-center w-20 h-20 rounded-full border border-gold/40 text-gold text-2xl mb-7"><i class="fa-solid fa-leaf"></i></div>
+          <h3 class="font-mincho text-xl tracking-wider mb-4">体にやさしい野菜</h3>
+          <div class="w-8 h-px bg-gold/50 mb-5"></div>
+          <p class="font-serif text-sub text-sm leading-loose max-w-xs">
+            京のおばんざいらしく、野菜をたっぷり。
+            美容と健康にうれしい小鉢を、毎日少しずつ入れ替えて。
+          </p>
+        </div>
+
+        <div class="reveal flex flex-col items-center">
+          <div class="grid place-items-center w-20 h-20 rounded-full border border-gold/40 text-gold text-2xl mb-7"><i class="fa-solid fa-fish"></i></div>
+          <h3 class="font-mincho text-xl tracking-wider mb-4">旬の魚を、丁寧に</h3>
+          <div class="w-8 h-px bg-gold/50 mb-5"></div>
+          <p class="font-serif text-sub text-sm leading-loose max-w-xs">
+            鯖の塩焼きをはじめ、その時季の魚をひと皿に。
+            滋味深い味わいで、お酒がすすむ夜を。
+          </p>
+        </div>
+
+        <div class="reveal flex flex-col items-center">
+          <div class="grid place-items-center w-20 h-20 rounded-full border border-gold/40 text-gold text-2xl mb-7"><i class="fa-solid fa-bowl-rice"></i></div>
+          <h3 class="font-mincho text-xl tracking-wider mb-4">えらぶ楽しみ</h3>
+          <div class="w-8 h-px bg-gold/50 mb-5"></div>
+          <p class="font-serif text-sub text-sm leading-loose max-w-xs">
+            日替わり十品から、その日の気分で。
+            少しずつ、いろいろ。ひとり呑みにも、ちょうどいい。
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== ACCESS ============== -->
+  <section id="access" class="relative overflow-hidden py-24 md:py-36 px-6 md:px-10 bg-paper washi">
+    <span class="kanji-bg absolute -right-6 top-16 text-[40vw] md:text-[22vw] leading-none">梟</span>
+    <div class="max-w-6xl mx-auto relative z-10">
+      <div class="text-center mb-16 md:mb-20">
+        <p class="eyebrow text-gold text-sm mb-4">ACCESS</p>
+        <h2 class="font-mincho text-3xl md:text-4xl tracking-wider2">店舗情報・アクセス</h2>
+        <div class="w-10 h-px bg-gold mx-auto mt-6"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+
+        <!-- 左：詳細 -->
+        <div class="reveal">
+          <dl class="divide-y divide-line">
+            <div class="grid grid-cols-[6.5rem_1fr] py-4 gap-5">
+              <dt class="text-sub text-sm tracking-wider2">店　名</dt>
+              <dd class="font-mincho tracking-wider">おばんざい居酒屋 ふくろう</dd>
+            </div>
+            <div class="grid grid-cols-[6.5rem_1fr] py-4 gap-5">
+              <dt class="text-sub text-sm tracking-wider2">住　所</dt>
+              <dd class="font-serif text-sm leading-loose">〒133-0056<br>東京都江戸川区南小岩8-25-1</dd>
+            </div>
+            <div class="grid grid-cols-[6.5rem_1fr] py-4 gap-5">
+              <dt class="text-sub text-sm tracking-wider2">アクセス</dt>
+              <dd class="font-serif text-sm leading-loose">JR小岩駅 南口より 徒歩7分</dd>
+            </div>
+            <div class="grid grid-cols-[6.5rem_1fr] py-4 gap-5">
+              <dt class="text-sub text-sm tracking-wider2">電　話</dt>
+              <dd class="font-cormo text-lg tracking-wider2"><a href="tel:07089862960" class="hover:text-gold transition-colors">070-8986-2960</a></dd>
+            </div>
+            <div class="grid grid-cols-[6.5rem_1fr] py-4 gap-5">
+              <dt class="text-sub text-sm tracking-wider2">営業時間</dt>
+              <dd class="font-serif text-sm leading-loose">16:00 – 23:00<br><span class="text-sub text-xs">（L.O. 22:30）</span></dd>
+            </div>
+            <div class="grid grid-cols-[6.5rem_1fr] py-4 gap-5">
+              <dt class="text-sub text-sm tracking-wider2">定休日</dt>
+              <dd class="font-serif text-sm">火曜日</dd>
+            </div>
+            <div class="grid grid-cols-[6.5rem_1fr] py-4 gap-5">
+              <dt class="text-sub text-sm tracking-wider2">席　数</dt>
+              <dd class="font-serif text-sm leading-loose">20席（カウンター7席 / テーブル14席）<br><span class="text-sub text-xs">貸切・ご宴会も承ります（20名様まで）</span></dd>
+            </div>
+            <div class="grid grid-cols-[6.5rem_1fr] py-4 gap-5">
+              <dt class="text-sub text-sm tracking-wider2">お支払い</dt>
+              <dd class="font-serif text-sm leading-loose">現金のみ<br><span class="text-sub text-xs">Wi-Fi・電源あり / テイクアウト可</span></dd>
+            </div>
+          </dl>
+
+          <div class="flex items-center gap-5 mt-9">
+            <a href="https://www.instagram.com/owl.koiwa/" target="_blank" rel="noopener" aria-label="Instagram" class="text-sub hover:text-gold transition-colors text-xl"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://tabelog.com/tokyo/A1312/A131204/13319723/" target="_blank" rel="noopener" aria-label="食べログ" class="text-sub hover:text-gold transition-colors text-sm tracking-wider2 border border-line px-3 py-1.5">食べログ</a>
+          </div>
+        </div>
+
+        <!-- 右：地図 -->
+        <div class="reveal">
+          <div class="relative w-full aspect-[4/3] md:aspect-[4/4.2] overflow-hidden bg-line">
+            <iframe
+              src="https://www.google.com/maps?q=東京都江戸川区南小岩8-25-1&output=embed"
+              width="100%" height="100%"
+              style="border:0; filter: grayscale(35%) contrast(0.96);"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="おばんざい居酒屋ふくろう 地図"></iframe>
+          </div>
+          <a href="https://www.google.com/maps?q=東京都江戸川区南小岩8-25-1" target="_blank" rel="noopener" class="mt-5 inline-flex items-center gap-3 text-sub hover:text-gold transition-colors text-sm tracking-wider2">
+            <i class="fa-solid fa-up-right-from-square text-xs"></i><span>Googleマップで開く</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== RESERVATION CTA 帯 ============== -->
+  <section id="reservation" class="relative overflow-hidden py-20 md:py-28 px-6 text-center text-kinari">
+    <img src="images/reservation.jpg" alt="夜のふくろう 外観と暖簾" class="absolute inset-0 w-full h-full object-cover object-center">
+    <div class="absolute inset-0 bg-sumi/72"></div>
+    <div class="relative z-10 max-w-3xl mx-auto">
+      <p class="eyebrow text-goldlt text-sm mb-5">RESERVATION</p>
+      <h2 class="font-mincho text-2xl md:text-3xl tracking-wider2 leading-relaxed mb-7">
+        ご予約は、お電話または<br class="md:hidden">InstagramのDMで。
+      </h2>
+      <div class="hairline w-24 mx-auto mb-10"></div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="tel:07089862960" class="inline-flex items-center justify-center gap-3 w-full sm:w-auto px-10 py-4 bg-gold text-kinari tracking-wider2 hover:bg-kinari hover:text-sumi transition-colors duration-500">
+          <i class="fa-solid fa-phone"></i><span>070-8986-2960</span>
+        </a>
+        <a href="https://www.instagram.com/owl.koiwa/" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-3 w-full sm:w-auto px-10 py-4 border border-kinari/70 text-kinari tracking-wider2 hover:bg-kinari hover:text-sumi transition-colors duration-500">
+          <i class="fa-brands fa-instagram"></i><span>InstagramでDM</span>
+        </a>
+      </div>
+      <p class="mt-9 font-serif text-kinari/70 text-xs tracking-wider2">※ ご宴会・貸切（20名様まで）のご相談も、お気軽にどうぞ。</p>
+    </div>
+  </section>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="bg-sumi text-kinari/70 pt-16 pb-12 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 pb-10 border-b border-kinari/15">
+        <div>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="grid place-items-center w-9 h-9 rounded-full border border-goldlt/50 text-goldlt text-sm"><i class="fa-solid fa-feather-pointed"></i></span>
+            <span class="font-mincho text-lg tracking-wider2 text-kinari">おばんざい居酒屋 ふくろう</span>
+          </div>
+          <p class="font-serif text-sm leading-loose text-kinari/65">
+            〒133-0056 東京都江戸川区南小岩8-25-1<br>
+            JR小岩駅 南口 徒歩7分 ／ 16:00–23:00（L.O.22:30）／ 火曜定休
+          </p>
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="tel:07089862960" class="text-kinari/70 hover:text-goldlt transition-colors text-sm tracking-wider2"><i class="fa-solid fa-phone mr-2"></i>070-8986-2960</a>
+          <a href="https://www.instagram.com/owl.koiwa/" target="_blank" rel="noopener" aria-label="Instagram" class="text-kinari/70 hover:text-goldlt transition-colors text-xl"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://tabelog.com/tokyo/A1312/A131204/13319723/" target="_blank" rel="noopener" aria-label="食べログ" class="text-kinari/70 hover:text-goldlt transition-colors text-base"><i class="fa-solid fa-utensils"></i></a>
+        </div>
+      </div>
+      <p class="text-center mt-8 eyebrow text-xs tracking-wider2 text-kinari/45">© 2026 Obanzai Izakaya owl — Koiwa</p>
+    </div>
+  </footer>
+
+  <!-- ============== MOBILE FIXED CTA ============== -->
+  <div class="mobile-cta fixed bottom-0 inset-x-0 z-40 grid grid-cols-2 border-t border-line bg-kinari/95 backdrop-blur-md">
+    <a href="tel:07089862960" class="flex items-center justify-center gap-2 py-4 text-sumi text-sm tracking-wider2 border-r border-line">
+      <i class="fa-solid fa-phone text-xs"></i><span>お電話</span>
+    </a>
+    <a href="https://www.instagram.com/owl.koiwa/" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 py-4 bg-gold text-kinari text-sm tracking-wider2">
+      <i class="fa-brands fa-instagram text-xs"></i><span>ご予約DM</span>
+    </a>
+  </div>
+
+  <!-- スクロールリビール -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal,.reveal-scale').forEach((el) => observer.observe(el));
+  </script>
+
+</body>
+</html>
