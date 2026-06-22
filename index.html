@@ -240,24 +240,27 @@
 
       <div class="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-8">
 
-        <!-- 01 おばんざい 3種・5種（2枚を1フレームに合体） -->
-        <article class="reveal-scale group">
-          <div class="overflow-hidden aspect-[4/3] mb-4 shadow-[0_22px_44px_-26px_rgba(36,30,24,.6)] flex gap-px bg-gold/40">
-            <img src="images/menu-01.jpg" alt="おばんざい3種" class="w-1/2 h-full object-cover zoom">
-            <img src="images/menu-02.jpg" alt="おばんざい5種" class="w-1/2 h-full object-cover zoom">
-          </div>
-          <h3 class="font-mincho text-base md:text-lg tracking-wider">おばんざい</h3>
-          <div class="mt-1.5 space-y-1">
-            <div class="flex items-baseline justify-between gap-2 border-b border-line/60 pb-1">
-              <span class="font-serif text-sub text-xs tracking-wider">3種</span>
-              <span class="font-cormo text-gold text-lg whitespace-nowrap">¥1,000</span>
+        <!-- 01 おばんざい 3種・5種（写真1枚／PCは2枠ぶち抜きの横並びカード） -->
+        <article class="reveal-scale group md:col-span-2">
+          <div class="md:flex md:gap-6 md:items-center">
+            <div class="overflow-hidden aspect-[4/3] md:aspect-square md:w-1/2 mb-4 md:mb-0 shadow-[0_22px_44px_-26px_rgba(36,30,24,.6)]">
+              <img src="images/menu-01.jpg" alt="おばんざい" class="w-full h-full object-cover zoom">
             </div>
-            <div class="flex items-baseline justify-between gap-2">
-              <span class="font-serif text-sub text-xs tracking-wider">5種</span>
-              <span class="font-cormo text-gold text-lg whitespace-nowrap">¥1,500</span>
+            <div class="md:w-1/2 md:flex md:flex-col md:justify-center">
+              <h3 class="font-mincho text-base md:text-xl tracking-wider">おばんざい</h3>
+              <div class="mt-2 space-y-1.5 md:max-w-[16rem]">
+                <div class="flex items-baseline justify-between gap-3 border-b border-line/60 pb-1">
+                  <span class="font-serif text-sub text-sm tracking-wider">3種</span>
+                  <span class="font-cormo text-gold text-lg whitespace-nowrap">¥1,000</span>
+                </div>
+                <div class="flex items-baseline justify-between gap-3">
+                  <span class="font-serif text-sub text-sm tracking-wider">5種</span>
+                  <span class="font-cormo text-gold text-lg whitespace-nowrap">¥1,500</span>
+                </div>
+              </div>
+              <p class="font-serif text-sub text-xs md:text-sm leading-relaxed mt-3">日替わりのおばんざいを彩りよく。3種・5種、お好みの量で。</p>
             </div>
           </div>
-          <p class="font-serif text-sub text-xs leading-relaxed mt-2">日替わりのおばんざいを彩りよく。3種・5種、お好みの量で。</p>
         </article>
 
         <!-- 03 鶏の唐揚げ3個 -->
